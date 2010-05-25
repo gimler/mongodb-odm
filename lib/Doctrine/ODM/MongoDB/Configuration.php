@@ -55,6 +55,8 @@ class Configuration
     public function __construct()
     {
         $this->_attributes['metadataDriverImpl'] = new PHPDriver();
+        $this->_attributes['dbPrefix'] = null;
+        $this->_attributes['dbSuffix'] = null;
     }
 
     /**
@@ -189,6 +191,38 @@ class Configuration
     }
 
     /**
+     * Sets the environment
+     *
+     * @param string $environment
+     */
+    public function setEnvironment($environment)
+    {
+        $this->_attributes['environment'] = $environment;
+    }
+
+    /**
+     * Gets the environment
+     *
+     * @return string $environment
+     */
+    public function getEnvironment()
+    {
+        return isset($this->_attributes['environment']) ?
+            $this->_attributes['environment'] : null;
+    }
+
+    /**
+     * Gets prefix for environment
+     *
+     * @return string $envPrefix
+     */
+    public function getEnvironmentPrefix()
+    {
+        return isset($this->_attributes['environment']) ?
+            sprintf('%s_', $this->_attributes['environment']) : null;
+    }
+
+    /**
      * Set the logger callable.
      *
      * @param mixed $loggerCallable The logger callable.
@@ -207,5 +241,45 @@ class Configuration
     {
         return isset($this->_attributes['loggerCallable']) ?
                 $this->_attributes['loggerCallable'] : null;
+    }
+
+    /**
+     * Set prefix for db name
+     *
+     * @param string $prefix The prefix for names of databases
+     */
+    public function setDBPrefix($prefix = null)
+    {
+        $this->_attributes['dbPrefix'] = $prefix;
+    }
+
+    /**
+     * Get prefix for db name
+     *
+     * @return string 
+     */
+    public function getDBPrefix()
+    {
+        return $this->_attributes['dbPrefix'];
+    }
+
+    /**
+     * Set suffix for db name
+     *
+     * @param string $suffix The suffix for names of tables
+     */
+    public function setDBSuffix($suffix = null)
+    {
+        $this->_attributes['dbSuffix'] = $suffix;
+    }
+
+    /**
+     * Get suffix for db name
+     *
+     * @return string
+     */
+    public function getDBSuffix()
+    {
+        return $this->_attributes['dbSuffix'];
     }
 }
